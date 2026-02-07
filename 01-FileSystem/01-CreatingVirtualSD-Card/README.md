@@ -41,6 +41,9 @@ So this command creates the size that I need. I think it may transfer data from 
 ### 2- Define what is the difference between the DOS/MBR and GPT partition scheme/type.
 
 I think DOS/MBR is the older version. I don't know GPT partition scheme.
+**Correction:**
+- **MBR (Master Boot Record):** Older standard. Supports up to 4 primary partitions. Max disk size is 2TB. Stores partition info in the first sector of the disk.
+- **GPT (GUID Partition Table):** Newer standard (part of UEFI). Supports up to 128 partitions (on Windows). Max disk size 18EB (Exabytes). Stores partition info in the beginning and end of the disk definition for redundancy (backup header).
 
 ---
 
@@ -49,6 +52,13 @@ I think DOS/MBR is the older version. I don't know GPT partition scheme.
 A file system is a software driver protocol used for communication between components inside the PC.
 
 - **FAT16** is the most important communication protocol used for communication between the BIOS and the Bootloader, or when trying to load anything from an SD card.
+
+**Correction:**
+A **File System** is the method and data structure that an operating system uses to keep track of files on a disk or partition; that is, the way the files are organized on the disk.
+
+-   **FAT16:** Simple and widely supported by almost all operating systems and bootloaders. It has a maximum volume size of 2GB (or 4GB with large clusters). Often used for small boot partitions.
+-   **FAT32:** Extension of FAT16. Supports larger volume sizes (up to 2TB) but has a maximum file size limit of 4GB. Standard for SD cards and USB drives.
+-   **EXT4:** The default file system for most modern Linux distributions. It supports journaling (improves reliability), file permissions, and much larger file and volume sizes compared to FAT.
 
 ---
 
@@ -76,6 +86,8 @@ Done.
 ### 5- Define what are Loop Devices and why Linux uses them.
 
 Loop devices are used to give us the feature to create virtual memory.
+**Correction:**
+Loop devices are pseudo-devices that make a file accessible as a block device. They allow you to mount a file (holding a filesystem image) as if it were a physical disk. Linux uses them to manipulate disk images (like `.img` or `.iso` files).
 
 #### a. Command to create a loop device
 
@@ -100,12 +112,23 @@ losetup -d sd.img
 ### 6- How can you check the current loop device limit?
 
 The limit is defined according to MBR, so when running `lsblk` it shows us which location starts and ends for processing.
+**Correction:**
+You can check the number of available loop devices by listing them in `/dev/`:
+```bash
+ls /dev/loop*
+```
+Or check the kernel module parameter:
+```bash
+cat /sys/module/loop/parameters/max_loop
+```
 
 ---
 
 ### 7- Can you expand the number of loop devices in Linux?
 
 Actually, we can't because every PC has limited loop devices.
+**Correction:**
+Yes, you can. The number of loop devices is dynamic in modern kernels, or can be set via the `max_loop` kernel parameter at boot time (e.g., `max_loop=64`). You can also use `mknod` to create more loop device nodes if the kernel driver supports it.
 
 ---
 
@@ -128,6 +151,10 @@ Done.
 #### b. Second primary partition (ext4, label "rootfs")
 
 I don't know.
+**Answer:**
+```bash
+mkfs.ext4 -L rootfs /dev/loop8p2
+```
 
 ---
 
@@ -140,9 +167,24 @@ I don't know.
 ### 11- What is the difference between a block device vs a character device?
 
 I don't know.
+**Answer:**
+-   **Block Device:** Reads and writes data in fixed-size blocks (e.g., 512 bytes). Supports random access (seeking). Buffered by the OS. Examples: Hard drives (`/dev/sda`), USB sticks, Loop devices.
+-   **Character Device:** Reads and writes data as a stream of characters (bytes). Access is sequential (no random access). Unbuffered. Examples: Keyboards, Serial ports (`/dev/ttyS0`), Sound cards.
 
 ---
 
 ### 12- Create Mount Points and Mount the Virtual Disk Image Partitions.
 
 *(Answer not provided)*
+**Answer:**
+```bash
+# Create mount points
+mkdir -p ./boot ./rootfs
+
+# Mount partitions
+sudo mount /dev/loop8p1 ./boot
+sudo mount /dev/loop8p2 ./rootfs
+
+# Verify
+ls -l ./boot ./rootfs
+```
