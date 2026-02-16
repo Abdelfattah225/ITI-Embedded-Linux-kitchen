@@ -5,25 +5,10 @@
 ![U-Boot](https://img.shields.io/badge/U--Boot-2026.01--rc5-blue?style=for-the-badge&logo=linux)
 ![QEMU](https://img.shields.io/badge/QEMU-Cortex--A9-orange?style=for-the-badge&logo=qemu)
 ![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-3B+-red?style=for-the-badge&logo=raspberrypi)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 **A comprehensive guide to understanding bootloaders, boot sequences, and building U-Boot for embedded systems.**
 
 </div>
-
----
-
-## 📑 Table of Contents
-
-- [Question 1: What is a Bootloader?](#-question-1-what-is-a-bootloader)
-- [Question 2: Boot Chain Sequences](#-question-2-boot-chain-sequences)
-  - [Raspberry Pi Boot Chain](#-raspberry-pi-boot-chain)
-  - [PC Boot Chain (Bonus)](#-pc-boot-chain-bonus)
-- [Question 3: U-Boot vs GRUB](#-question-3-u-boot-vs-grub)
-- [Question 4: Raspberry Pi Boot Partition Files](#-question-4-raspberry-pi-boot-partition-files)
-- [Question 5: Build & Test U-Boot in QEMU](#-question-5-build--test-u-boot-in-qemu)
-- [Question 6: Deploy U-Boot on Raspberry Pi 3B+](#-question-6-deploy-u-boot-on-raspberry-pi-3b)
-- [Question 7: Hardware Description File](#-question-7-hardware-description-file)
 
 ---
 
@@ -286,40 +271,6 @@ u-boot-cmd =>
 
 > ⏳ **Status: Pending** - This section will be completed when SD card is available.
 
-### Planned Steps
-
-#### 6a. Build U-Boot for Raspberry Pi 3B+
-
-```bash
-# Set cross-compiler
-export CROSS_COMPILE=aarch64-linux-gnu-
-
-# Configure for RPi 3B+ (64-bit)
-make rpi_3_b_plus_defconfig
-
-# Customize (optional)
-make menuconfig
-
-# Build
-make -j$(nproc)
-```
-
-#### 6b. Prepare SD Card
-
-```bash
-# Create partitions
-# Partition 1: FAT32 (boot) - 256MB
-# Partition 2: ext4 (rootfs) - remaining space
-
-# Mount boot partition
-sudo mount /dev/sdX1 /mnt/boot
-
-# Copy required files
-sudo cp bootcode.bin start.elf fixup.dat /mnt/boot/
-sudo cp u-boot.bin /mnt/boot/
-sudo cp bcm2710-rpi-3-b-plus.dtb /mnt/boot/
-sudo cp config.txt /mnt/boot/
-```
 
 ---
 
@@ -377,26 +328,9 @@ The **Device Tree Blob (.dtb)** file provides hardware description to U-Boot and
 
 ---
 
-## 📚 Additional Resources
-
-- [U-Boot Official Documentation](https://docs.u-boot.org/)
-- [Raspberry Pi Boot Documentation](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#boot-sequence)
-- [Device Tree Specification](https://www.devicetree.org/)
-- [QEMU ARM Documentation](https://www.qemu.org/docs/master/system/arm/vexpress.html)
-
----
 
 ## 👤 Author
 
-**Abdelfattah** - Embedded Linux Student
+**Abdelfattah** 
 
 ---
-
-<div align="center">
-
-Made with ❤️ for Embedded Linux Learning
-
-![Embedded Linux](https://img.shields.io/badge/Embedded-Linux-yellow?style=flat-square&logo=linux)
-![ARM](https://img.shields.io/badge/ARM-Cortex--A-blue?style=flat-square&logo=arm)
-
-</div>
