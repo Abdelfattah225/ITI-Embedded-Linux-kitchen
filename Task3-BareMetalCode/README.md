@@ -1,10 +1,5 @@
-```md
-# Bare-Metal LED Blinker
+# Bare-Metal LED Blinker On RPI3 b+ 
 
-## Project Name
-**abdelfattah_blinky**
-
----
 
 ## Idea
 This project blinks an LED on Raspberry Pi 3B+ **without any operating system**.
