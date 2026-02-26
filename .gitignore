@@ -1,2 +1,4 @@
 *.img
 *.image
+*.elf
+*.o
