@@ -324,9 +324,7 @@ sudo qemu-system-aarch64 \
 
 
 ### 6.3 QEMU Output Screenshot
-```
 ![](qemu_output.png)
-```
 
 ---
 
@@ -374,9 +372,9 @@ sudo picocom -b 115200 /dev/ttyUSB0
 ```
 
 ### 7.4 Real RPi Output Screenshot
-```
+
 ![](rpi_output.png)
-```
+
 
 ---
 ## 🎯 Results
