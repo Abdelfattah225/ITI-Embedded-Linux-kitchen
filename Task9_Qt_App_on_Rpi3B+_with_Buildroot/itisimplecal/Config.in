@@ -1,0 +1,7 @@
+config BR2_PACKAGE_ITISIMPLECAL
+	bool "itisimplecal"
+	depends on BR2_PACKAGE_QT6
+	depends on BR2_PACKAGE_QT6BASE_GUI
+	depends on BR2_PACKAGE_QT6DECLARATIVE
+	help
+	  A simple Qt6 QML calculator by Abdelfattah.
