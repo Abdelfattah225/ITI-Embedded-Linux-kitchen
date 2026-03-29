@@ -9,8 +9,6 @@ Deployed a Qt6 QML calculator application on a Raspberry Pi 3 B+ (64-bit)
 using a custom Buildroot Linux image. The app runs directly on the
 framebuffer without any desktop environment (no X11, no Wayland).
 
-![Calculator Running on RPi](screenshot.jpg)
-
 ---
 
 ## 🏗️ Architecture
