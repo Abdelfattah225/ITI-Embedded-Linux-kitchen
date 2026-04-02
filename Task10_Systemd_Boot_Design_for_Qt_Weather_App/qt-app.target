@@ -1,0 +1,8 @@
+[Unit]
+Description=Qt Weather Application Target
+Requires=mnt-appdata.mount qt-prep.service qt-app.service network-online.target
+After=mnt-appdata.mount qt-prep.service network-online.target
+Wants=mnt-appdata.mount qt-prep.service qt-app.service
+
+[Install]
+WantedBy=graphical.target

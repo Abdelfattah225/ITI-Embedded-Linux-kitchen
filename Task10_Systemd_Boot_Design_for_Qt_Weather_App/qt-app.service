@@ -1,0 +1,19 @@
+[Unit]
+Description=WeatherApp Qt Application
+Requires=qt-prep.service
+After=qt-prep.service
+Wants=network-online.target
+After=network-online.target
+RequiresMountsFor=/mnt/appdata
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/appTask04_WeatherApp
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/run/user/1000/.mutter-Xwaylandauth.5713M3
+Environment=WAYLAND_DISPLAY=wayland-0
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+Restart=on-failure
+RestartSec=3
+[Install]
+WantedBy=qt-app.target

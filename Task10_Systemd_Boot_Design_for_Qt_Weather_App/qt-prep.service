@@ -1,0 +1,12 @@
+[Unit]
+Description=Qt App Environment Preparation
+Requires=mnt-appdata.mount
+After=mnt-appdata.mount
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/bin/qt-prep.sh
+
+[Install]
+WantedBy=qt-app.target
